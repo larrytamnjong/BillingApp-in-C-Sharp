@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BillingApp.DAL
 {
@@ -20,19 +22,23 @@ namespace BillingApp.DAL
         {
             bool isSuccesful = false;
             
-            //Connecto to database
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //Connect to to database
+         //SqlConnection conn = new SqlConnection(myconnstrng);
+          MySqlConnection conn = new MySqlConnection(myconnstrng);
+      
             try
             {
                 string sql = "SELECT * FROM tbl_users WHERE username=@username AND password=@password AND user_type=@user_type";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@username", l.username);
                 cmd.Parameters.AddWithValue("@password", l.password);
                 cmd.Parameters.AddWithValue("@user_type", l.user_type);
-                
 
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 conn.Open();
 
                 DataTable dt = new DataTable(); 
