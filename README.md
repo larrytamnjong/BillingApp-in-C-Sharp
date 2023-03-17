@@ -10,7 +10,7 @@ You can download this project as a zip file and run on your computer but you'll 
 4) Open the database you just created and from the downloaded file from 1 above  import  "inventory_manager.sql" to the database
 5) Depending on the setup of your XAMPP you might need to change the connection settings in project solution App.config file
 
- <add name="connstrng" connectionString="server=localhost;user=root;database=inventory_manager;port=3306;password=;" 
+  add name="connstrng" connectionString="server=localhost;user=root;database=inventory_manager;port=3306;password=;" 
 
   The default user is root and password is empty
 
