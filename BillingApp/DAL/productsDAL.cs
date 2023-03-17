@@ -1,4 +1,5 @@
 ﻿using BillingApp.BLL;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,17 +23,20 @@ namespace BillingApp.DAL
             //Create DataTable
             DataTable dt = new DataTable();
             //Create connection
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 //Create query String
                 string sql = "SELECT * FROM tbl_products";
 
                 //Create Sql Command
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 //Create adapter to manage data
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                // SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
 
                 //Open Connection
                 conn.Open();
@@ -54,12 +58,14 @@ namespace BillingApp.DAL
         public bool Insert(productsBLL p)
         {
             bool isSuccessful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
 
             try
             {
                 string sql = "INSERT INTO tbl_products (name, category, description, rate, qty, added_date, added_by) VALUES (@name, @category, @description, @rate, @qty, @added_date, @added_by)";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@name", p.name);
                 cmd.Parameters.AddWithValue("@category", p.category);
@@ -94,17 +100,20 @@ namespace BillingApp.DAL
         public bool Update(productsBLL p)
         {
             bool isSuccessful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+          //  SqlConnection conn = new SqlConnection(myconnstrng);
+              MySqlConnection conn = new MySqlConnection(myconnstrng);
+
             try
             {
                 string sql = "UPDATE tbl_products SET name=@name, category=@category, description=@description, rate=@rate, added_date=@added_date, added_by=@added_by WHERE id=@id ";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@name", p.name);
                 cmd.Parameters.AddWithValue("@category", p.category);
                 cmd.Parameters.AddWithValue("@description", p.description);
                 cmd.Parameters.AddWithValue("@rate", p.rate);
-                //cmd.Parameters.AddWithValue("@qty", p.qty);
+                cmd.Parameters.AddWithValue("@qty", p.qty);
                 cmd.Parameters.AddWithValue("@added_date", p.added_date);
                 cmd.Parameters.AddWithValue("@added_by", p.added_by);
                 cmd.Parameters.AddWithValue("@id", p.id);
@@ -137,12 +146,14 @@ namespace BillingApp.DAL
         public bool Delete(productsBLL p)
         {
             bool isSuccessful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //  SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 string sql = "DELETE FROM tbl_products WHERE id=@id";
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", p.id);
 
                 conn.Open();
@@ -170,12 +181,16 @@ namespace BillingApp.DAL
         public DataTable Search(string keywords)
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 string sql = "SELECT * FROM tbl_products WHERE id LIKE '%" + keywords + "%' OR name LIKE '%" + keywords + "%' OR category LIKE '%" + keywords + "%' ";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 conn.Open();
                 adapter.Fill(dt);
             } catch (Exception ex)
@@ -192,13 +207,15 @@ namespace BillingApp.DAL
         public productsBLL GetProductsForTransaction(string keyword)
         {
             productsBLL p = new productsBLL();
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             DataTable dt = new DataTable();
 
             try
             {
                 string sql = "SELECT name, qty, rate FROM tbl_products WHERE id LIKE '%" + keyword + "%' OR name LIKE '%" + keyword + "%' ";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                //SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
                 conn.Open();
                 adapter.Fill(dt);
 
@@ -226,12 +243,15 @@ namespace BillingApp.DAL
 
             productsBLL p = new productsBLL();
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
 
             try
             {
                 string sql = "SELECT id FROM tbl_products WHERE name='" + productName + "'";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+
+                //SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
                 conn.Open();
                 adapter.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -254,13 +274,15 @@ namespace BillingApp.DAL
         #region Method to get current quantity from the Database based on the product ID
         public decimal GetProductQty(int ProductID)
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             decimal qty = 0;
             DataTable dt = new DataTable();
             try
             {
                 string sql = "SELECT qty FROM tbl_products WHERE id = '"+ProductID+"' ";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                //SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
                 conn.Open();
                 adapter.Fill(dt);
 
@@ -282,12 +304,14 @@ namespace BillingApp.DAL
         #region Method to update quantity
         public bool updateQuantity(int ProductID, decimal Qty)
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             bool isSuccessful = false;
             try
             {
                 string sql = "UPDATE tbl_products SET qty=@qty WHERE id=@id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@qty", Qty);
                 cmd.Parameters.AddWithValue("@id", ProductID);
@@ -318,7 +342,8 @@ namespace BillingApp.DAL
         public bool IncreaseProduct(int ProductID, decimal IncreaseQty)
         {
             bool isSuccessful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 //Get the Current Quantity From DataBase based on ID
@@ -344,7 +369,8 @@ namespace BillingApp.DAL
         public bool DecreaseProduct(int ProductID, decimal Qty)
         {
             bool isSuccessful = false;
-            SqlConnection conn = new SqlConnection();
+            //SqlConnection conn = new SqlConnection();
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 decimal currentQty = GetProductQty(ProductID);
@@ -365,13 +391,17 @@ namespace BillingApp.DAL
         #region Display products based on category
         public DataTable DisplayProductsByCategory(string category)
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             DataTable dt = new DataTable();
             try
             {
                 string sql = "SELECT * FROM tbl_products WHERE category='" + category + "'";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                // SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 conn.Open();
 
                 adapter.Fill(dt);

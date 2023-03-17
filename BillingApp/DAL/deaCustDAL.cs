@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +21,15 @@ namespace BillingApp.DAL
         public DataTable Select()
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 string sql = "SELECT * FROM tbl_dea_cust";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd  = new MySqlCommand(sql, conn);
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 conn.Open();
                 adapter.Fill(dt);   
 
@@ -44,12 +48,16 @@ namespace BillingApp.DAL
         #region Insert Dealer and Customer Data
         public bool Insert(deaCustBLL dc)
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             bool isSuccessful = false;
             try
             {
                 string sql = "INSERT INTO tbl_dea_cust (type, name, email, contact, address,added_date, added_by) VALUES (@type, @name, @email, @contact, @address, @added_date, @added_by)";
-                SqlCommand cmd = new SqlCommand(@sql, conn);
+                
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                
 
                 cmd.Parameters.AddWithValue("@type", dc.type);
                 cmd.Parameters.AddWithValue("@name", dc.name);
@@ -85,13 +93,15 @@ namespace BillingApp.DAL
         #region Update Dealer and Customer Method
         public bool Update(deaCustBLL dc)
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             bool isSuccessful = false;
             try
             {
                 string sql = "UPDATE tbl_dea_cust SET type=@type, name=@name, email=@email, contact=@contact, address=@address, added_date=@added_date, added_by=added_by WHERE id=@id";
-               
-                SqlCommand cmd = new SqlCommand(sql, conn); 
+
+                // SqlCommand cmd = new SqlCommand(sql, conn); 
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
                 
                 cmd.Parameters.AddWithValue("@type", dc.type);
                 cmd.Parameters.AddWithValue("@name", dc.name);
@@ -127,12 +137,14 @@ namespace BillingApp.DAL
         #region Delete method for dealer and customer 
         public bool Delete(deaCustBLL dc)
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             bool isSuccessful = false;
             try
             {
                 string sql = "DELETE FROM tbl_dea_cust WHERE id=@id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", dc.id);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();   
@@ -159,13 +171,16 @@ namespace BillingApp.DAL
         #region Search Method for dealer and Customer DEALER CUSTORMER MODULE
         public DataTable Search(string keywords)
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             DataTable dt = new DataTable();
             try
             {
                 string sql = "SELECT *FROM tbl_dea_cust WHERE id LIKE '%"+keywords+"%' OR type LIKE '%"+keywords+"%' OR name LIKE '%"+keywords+"%'";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+               // SqlCommand cmd = new SqlCommand(sql, conn);
+               MySqlCommand cmd = new MySqlCommand(sql, conn);
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 conn.Open();
                 adapter.Fill(dt);
 
@@ -185,12 +200,14 @@ namespace BillingApp.DAL
         public deaCustBLL SearchDealerCustomerForTransaction(string keyword)
         {
            deaCustBLL dc = new deaCustBLL();
-           SqlConnection conn = new SqlConnection(myconnstrng);
-           DataTable dt = new DataTable();
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
+            DataTable dt = new DataTable();
             try
             {
                 string sql = "SELECT name, email, contact, address FROM tbl_dea_cust WHERE id LIKE '%"+keyword+"%' OR name LIKE '%"+keyword+"%' OR email LIKE '%"+keyword+"%'";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                // SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
                 conn.Open();
                 adapter.Fill(dt);   
                 if(dt.Rows.Count> 0)
@@ -219,12 +236,15 @@ namespace BillingApp.DAL
 
             deaCustBLL dc = new deaCustBLL();
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
+            
 
             try
             {
                 string sql = "SELECT id FROM tbl_dea_cust WHERE name='"+name+"'";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                //SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
                 conn.Open();
                 adapter.Fill(dt);
                 if(dt.Rows.Count > 0)

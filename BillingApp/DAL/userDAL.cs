@@ -22,7 +22,8 @@ namespace BillingApp.DAL
         public DataTable Select() {
 
             //Create connection to database
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
 
             //create DataTable object to hold data from database(DataTable is a central object. It represents the database tables that provide a collection of rows and columns in grid form.)
             DataTable dt = new DataTable();
@@ -32,10 +33,12 @@ namespace BillingApp.DAL
                 String sql = "SELECT * FROM tbl_users";
 
                 //Create Sql command (A SqlCommand object allows you to query and send commands to a database.)
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 //Created Sql adapter (The Adapter design pattern converts the interface of a class into another interface clients expect.)
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 //Open connection
                 conn.Open();    
 
@@ -64,12 +67,14 @@ namespace BillingApp.DAL
         public bool Insert(userBLL u)
         {
             bool isSuccesful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 String sql = "INSERT INTO tbl_users (first_name,last_name,email,username,password,contact,address,gender,user_type,added_date,added_by) VALUES (@first_name,@last_name,@email,@username,@password,@contact,@address,@gender,@user_type,@added_date,@added_by)";
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                // SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 //Use AddWithValue whenever you want to add a parameter by specifying its name and value.
                 cmd.Parameters.AddWithValue("@first_name", u.first_name);
@@ -113,12 +118,14 @@ namespace BillingApp.DAL
         public bool Update(userBLL u)
         {
           bool  isSuccesful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
 
             try
             {
                 string sql = "UPDATE tbl_users SET first_name=@first_name, last_name=@last_name, email=@email, username=@username, password=@password, contact=@contact, address=@address, gender=@gender, user_type=@user_type, added_date=@added_date, added_by=@added_by WHERE id=@id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //  SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@first_name", u.first_name);
                 cmd.Parameters.AddWithValue("@last_name", u.last_name);
                 cmd.Parameters.AddWithValue("@email", u.email);
@@ -161,11 +168,13 @@ namespace BillingApp.DAL
         public bool Delete(userBLL u)
         {
             bool isSuccesful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 string sql = "DELETE FROM tbl_users WHERE id=@id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", u.id);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
@@ -195,7 +204,8 @@ namespace BillingApp.DAL
         {
 
             //Create connection to database
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
 
             //create DataTable object to hold data from database(DataTable is a central object. It represents the database tables that provide a collection of rows and columns in grid form.)
             DataTable dt = new DataTable();
@@ -205,10 +215,12 @@ namespace BillingApp.DAL
                 String sql = "SELECT * FROM tbl_users WHERE id LIKE '%"+keyword+"%' OR first_name LIKE '%"+keyword+"%' OR username LIKE '%"+keyword+"%' OR last_name LIKE '%"+keyword+"%'";
 
                 //Create Sql command (A SqlCommand object allows you to query and send commands to a database.)
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 //Created Sql adapter (The Adapter design pattern converts the interface of a class into another interface clients expect.)
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 //Open connection
                 conn.Open();
 
@@ -237,12 +249,14 @@ namespace BillingApp.DAL
         {
             userBLL u = new userBLL();
 
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             DataTable dt = new DataTable();
             try
             {
                 string sql = "SELECT id FROM tbl_users WHERE username = '" + username + "'";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                //SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn); 
                 conn.Open();
                 adapter.Fill(dt);
 

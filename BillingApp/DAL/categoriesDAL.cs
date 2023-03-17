@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,8 @@ namespace BillingApp.DAL
         #region Select Method 
         public DataTable Select()
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);    
+            // SqlConnection conn = new SqlConnection(myconnstrng);    
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             DataTable dt = new DataTable();
 
             try
@@ -28,11 +30,13 @@ namespace BillingApp.DAL
                 string sql = "SELECT * FROM tbl_categories";
 
                 //Write Sql Command
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
 
                 //Create instance of Adapter
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 conn.Open();
 
                 adapter.Fill(dt);
@@ -56,14 +60,15 @@ namespace BillingApp.DAL
             //Create a boolean variable and set its default to false
             bool isSuccessful = false;
             //Connect to Database
-            SqlConnection conn = new SqlConnection(myconnstrng);
-
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 //Query to add new category
                 string sql = "INSERT INTO tbl_categories (title, description,added_date, added_by) VALUES (@title, @description, @added_date, @added_by)";
                 //Create sql command
-                SqlCommand cmd = new SqlCommand(sql, conn);
+               // SqlCommand cmd = new SqlCommand(sql, conn);
+               MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@title", c.title);
                 cmd.Parameters.AddWithValue("@description", c.description);
@@ -99,12 +104,14 @@ namespace BillingApp.DAL
         public Boolean Update(categoriesBLL c)
         {
             bool isSuccessful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            // SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
 
                 string sql = "UPDATE tbl_categories SET title=@title, description=@description, added_date=@added_date, added_by=@added_by WHERE id=@id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+               // SqlCommand cmd = new SqlCommand(sql, conn);
+               MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@title", c.title);
                 cmd.Parameters.AddWithValue("@description", c.description);
@@ -141,12 +148,14 @@ namespace BillingApp.DAL
         public bool Delete(categoriesBLL c)
         {
             bool isSuccessful = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             try
             {
                 string sql = "DELETE FROM tbl_categories WHERE id=@id";
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@id", c.id);
                 conn.Open();
@@ -173,16 +182,19 @@ namespace BillingApp.DAL
         #region Methdd for Search Functionality
         public DataTable Search(string keywords)
         {
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
             DataTable dt = new DataTable();
 
             try
             {
                 string sql = "SELECT * FROM tbl_categories WHERE id LIKE '%" + keywords + "%' OR title LIKE '%" + keywords + "%' OR description LIKE '%" + keywords + "%'";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                //SqlCommand cmd = new SqlCommand(sql, conn);
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 //Hold data in data adapter
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
 
                 conn.Open();
                 adapter.Fill(dt);
