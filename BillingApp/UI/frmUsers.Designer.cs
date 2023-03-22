@@ -329,7 +329,6 @@
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(1406, 63);
             this.topPanel.TabIndex = 28;
-            
             // 
             // pictureBox1
             // 
@@ -356,6 +355,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1406, 756);
             this.Controls.Add(this.btn_Update);
             this.Controls.Add(this.btn_Delete);

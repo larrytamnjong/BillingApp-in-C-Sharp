@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingApp", "BillingApp\BillingApp.csproj", "{061B98AF-95A4-4CA2-BDE6-9A0DBA343804}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingApp.UI", "BillingApp\BillingApp.UI.csproj", "{061B98AF-95A4-4CA2-BDE6-9A0DBA343804}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingApp.DataAccess", "BillingApp.DataAccess\BillingApp.DataAccess.csproj", "{3C1BC28B-80D1-415D-8DC6-E7B193F07BB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingApp.DataModel", "BillingApp.DataModel\BillingApp.DataModel.csproj", "{38D520BD-C747-4344-A552-C71B841CF948}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{061B98AF-95A4-4CA2-BDE6-9A0DBA343804}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{061B98AF-95A4-4CA2-BDE6-9A0DBA343804}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{061B98AF-95A4-4CA2-BDE6-9A0DBA343804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1BC28B-80D1-415D-8DC6-E7B193F07BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1BC28B-80D1-415D-8DC6-E7B193F07BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1BC28B-80D1-415D-8DC6-E7B193F07BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1BC28B-80D1-415D-8DC6-E7B193F07BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38D520BD-C747-4344-A552-C71B841CF948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D520BD-C747-4344-A552-C71B841CF948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D520BD-C747-4344-A552-C71B841CF948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D520BD-C747-4344-A552-C71B841CF948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

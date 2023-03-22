@@ -18,3 +18,8 @@ C:\projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmDeaCust
 C:\projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmPurchaseAndSales.resources
 C:\projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmTransactions.resources
 C:\projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmInventory.resources
+C:\projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.csproj.CopyComplete
+C:\projects\C# projects\BillingApp\BillingApp\bin\Debug\Renci.SshNet.Async.dll
+C:\projects\C# projects\BillingApp\BillingApp\bin\Debug\Renci.SshNet.dll
+C:\projects\C# projects\BillingApp\BillingApp\bin\Debug\Renci.SshNet.xml
+C:\projects\C# projects\BillingApp\BillingApp\bin\Debug\Renci.SshNet.Async.xml

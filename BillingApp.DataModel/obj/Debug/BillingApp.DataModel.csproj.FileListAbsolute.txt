@@ -1,0 +1,6 @@
+C:\Projects\C# projects\BillingApp\BillingApp.DataModel\bin\Debug\BillingApp.DataModel.dll
+C:\Projects\C# projects\BillingApp\BillingApp.DataModel\bin\Debug\BillingApp.DataModel.pdb
+C:\Projects\C# projects\BillingApp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.csproj.AssemblyReference.cache
+C:\Projects\C# projects\BillingApp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.csproj.CoreCompileInputs.cache
+C:\Projects\C# projects\BillingApp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.dll
+C:\Projects\C# projects\BillingApp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.pdb
