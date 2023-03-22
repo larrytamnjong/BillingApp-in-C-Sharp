@@ -5,7 +5,7 @@ using System.Data;
 using System.Windows.Forms;
 using BillingApp.DataModel;
 
-namespace BillingApp.DataAcces
+namespace BillingApp.DataAccess
 {
     public class categoriesDAL
     {

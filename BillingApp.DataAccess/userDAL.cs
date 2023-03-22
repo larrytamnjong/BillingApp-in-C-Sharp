@@ -1,18 +1,12 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BillingApp.DataModel;
 //Data Access Layer
-namespace BillingApp.DataAcces
+namespace BillingApp.DataAccess
 {
     public class userDAL
     {

@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="categoriesDAL.cs" />
     <Compile Include="deaCustDAL.cs" />
-    <Compile Include="DGVPrinter.cs" />
     <Compile Include="loginDAL.cs" />
     <Compile Include="productsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,7 +56,7 @@
     <Compile Include="userDAL.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BillingApp.BusinessLogic\BillingApp.DataModel.csproj">
+    <ProjectReference Include="..\BillingApp.DataModel\BillingApp.DataModel.csproj">
       <Project>{38d520bd-c747-4344-a552-c71b841cf948}</Project>
       <Name>BillingApp.DataModel</Name>
     </ProjectReference>

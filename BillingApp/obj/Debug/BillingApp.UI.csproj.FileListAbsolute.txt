@@ -13,3 +13,32 @@ C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.frmAdminDashb
 C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.Properties.Resources.resources
 C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.csproj.GenerateResource.cache
 C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.csproj.CoreCompileInputs.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.csproj.AssemblyReference.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.csproj.SuggestedBindingRedirects.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.frmCategory.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.frmDeaCust.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.frmInventory.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.frmLogin.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.frmProducts.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.frmPurchaseAndSales.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.frmTransactions.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.frmUsers.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.frmUserDashboard.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.frmAdminDashboard.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.Properties.Resources.resources
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.csproj.GenerateResource.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.csproj.CoreCompileInputs.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\BillingApp.exe.config
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\BillingApp.exe
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\BillingApp.pdb
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\BillingApp.DataAccess.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\BillingApp.DataModel.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\Renci.SshNet.Async.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\Renci.SshNet.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\BillingApp.DataAccess.pdb
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\BillingApp.DataModel.pdb
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\Renci.SshNet.xml
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\bin\Debug\Renci.SshNet.Async.xml
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.UI.csproj.CopyComplete
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.exe
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp\obj\Debug\BillingApp.pdb

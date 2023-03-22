@@ -15,7 +15,7 @@ using BillingApp.DataModel;
 
 
 //[module:CLSCompliant(true)]
-namespace BillingApp.DataAcces
+namespace BillingApp
 {
     #region Supporting Classes
 

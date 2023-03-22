@@ -1,9 +1,11 @@
-﻿using BillingApp.BLL;
+﻿
 using System;
 using System.Data;
 using System.Drawing;
 using System.Transactions;
 using System.Windows.Forms;
+using BillingApp.DataAccess;
+using BillingApp.DataModel;
 
 namespace BillingApp.UI
 {
@@ -229,7 +231,7 @@ namespace BillingApp.UI
                     scope.Complete();
                     //Code to print Bill
 
-                    DGVPrinter printer = new DGVPrinter();
+                    var printer = new DGVPrinter();
                     printer.Title = "\r\n\r\nBILL AND STOCK ";
                     printer.SubTitle = "Bamenda, Cameroon \r\n\r\n Phone: 680162416\r\n";
                     printer.SubTitleFormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoClip;

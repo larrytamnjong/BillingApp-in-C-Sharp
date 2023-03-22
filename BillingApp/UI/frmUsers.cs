@@ -1,8 +1,11 @@
 ﻿
-using BillingApp.DAL;
+
 using System;
 using System.Data;
 using System.Windows.Forms;
+
+using BillingApp.DataAccess;
+using BillingApp.DataModel;
 
 namespace BillingApp.UI
 {

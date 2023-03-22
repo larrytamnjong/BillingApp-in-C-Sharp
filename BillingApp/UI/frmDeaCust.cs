@@ -1,13 +1,8 @@
-﻿
-using BillingApp.DAL;
+﻿using BillingApp.DataAccess;
+using BillingApp.DataModel;
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BillingApp.UI
@@ -18,9 +13,9 @@ namespace BillingApp.UI
         {
             InitializeComponent();
         }
-        deaCustBLL dc = new deaCustBLL();
-        deaCustDAL dcDal = new deaCustDAL();
-        userDAL uDal = new userDAL();
+        private deaCustBLL dc = new deaCustBLL();
+        private deaCustDAL dcDal = new deaCustDAL();
+        private userDAL uDal = new userDAL();
         private void picClose_Click(object sender, EventArgs e)
         {
             this.Close();

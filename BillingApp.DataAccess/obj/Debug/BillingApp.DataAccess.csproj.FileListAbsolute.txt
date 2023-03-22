@@ -1,2 +1,14 @@
 C:\Projects\C# projects\BillingApp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.AssemblyReference.cache
 C:\Projects\C# projects\BillingApp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.CoreCompileInputs.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.AssemblyReference.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.CoreCompileInputs.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\bin\Debug\BillingApp.DataAccess.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\bin\Debug\BillingApp.DataAccess.pdb
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\bin\Debug\BillingApp.DataModel.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\bin\Debug\MySql.Data.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\bin\Debug\Renci.SshNet.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\bin\Debug\BillingApp.DataModel.pdb
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\bin\Debug\Renci.SshNet.xml
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.CopyComplete
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.pdb

@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DGVPrinter.cs" />
     <Compile Include="UI\frmCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,8 +177,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BillingApp.DataAcces\BillingApp.DataAccess.csproj">
-      <Project>{2320318f-ec65-43be-b1c7-81e3bdd026de}</Project>
+    <ProjectReference Include="..\BillingApp.DataAccess\BillingApp.DataAccess.csproj">
+      <Project>{3c1bc28b-80d1-415d-8dc6-e7b193f07bb2}</Project>
       <Name>BillingApp.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\BillingApp.DataModel\BillingApp.DataModel.csproj">

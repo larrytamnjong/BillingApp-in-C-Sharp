@@ -4,3 +4,9 @@ C:\Projects\C# projects\BillingApp\BillingApp.DataModel\obj\Debug\BillingApp.Dat
 C:\Projects\C# projects\BillingApp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.csproj.CoreCompileInputs.cache
 C:\Projects\C# projects\BillingApp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.dll
 C:\Projects\C# projects\BillingApp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.pdb
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataModel\bin\Debug\BillingApp.DataModel.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataModel\bin\Debug\BillingApp.DataModel.pdb
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.csproj.AssemblyReference.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.csproj.CoreCompileInputs.cache
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.dll
+C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataModel\obj\Debug\BillingApp.DataModel.pdb
