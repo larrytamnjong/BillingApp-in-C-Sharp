@@ -1,0 +1,15 @@
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.csproj.AssemblyReference.cache
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.csproj.SuggestedBindingRedirects.cache
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmCategory.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmDeaCust.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmInventory.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmLogin.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmProducts.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmPurchaseAndSales.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmTransactions.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.frmUsers.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.frmUserDashboard.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.frmAdminDashboard.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.Properties.Resources.resources
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.csproj.GenerateResource.cache
+C:\Projects\C# projects\BillingApp\BillingApp\obj\Debug\BillingApp.UI.csproj.CoreCompileInputs.cache

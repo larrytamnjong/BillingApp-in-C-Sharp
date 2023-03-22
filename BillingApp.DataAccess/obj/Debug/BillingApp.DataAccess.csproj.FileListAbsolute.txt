@@ -1,0 +1,2 @@
+C:\Projects\C# projects\BillingApp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.AssemblyReference.cache
+C:\Projects\C# projects\BillingApp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.CoreCompileInputs.cache

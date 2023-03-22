@@ -137,6 +137,7 @@
             this.pnlDeaCust.Name = "pnlDeaCust";
             this.pnlDeaCust.Size = new System.Drawing.Size(1545, 143);
             this.pnlDeaCust.TabIndex = 33;
+            this.pnlDeaCust.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDeaCust_Paint);
             // 
             // dtbBillDate
             // 
