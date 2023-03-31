@@ -1,6 +1,5 @@
 ﻿
-using BillingApp.DataAccess;
-
+using DataAccessLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,41 +19,40 @@ namespace BillingApp.UI
         {
             InitializeComponent();
         }
-        categoriesDAL categoriesDAL= new categoriesDAL();
-        productsDAL pdal = new productsDAL();
+        BusinessLogicLayer businessLogicLayer = new BusinessLogicLayer();
+        InventoryManagerContext inventoryManagerContext = new InventoryManagerContext();
+      
+
+       
         private void picClose_Click(object sender, EventArgs e)
         {
-            this.Hide();                    
+            this.Hide();
         }
 
         private void frmInventory_Load(object sender, EventArgs e)
         {
 
             //set values to combo box
-            DataTable cDt = categoriesDAL.Select();
-
-            cmb_Category.DataSource = cDt;
-
-            cmb_Category.DisplayMember = "title";
-            cmb_Category.ValueMember = "title";
+       
+           this.tblCategoryBindingSource.DataSource = businessLogicLayer.Select<TblCategory>(inventoryManagerContext.TblCategories);
+            cmb_Category.DisplayMember = "Title";
+            cmb_Category.ValueMember = "Title";
 
             //Display all products
-            DataTable pdt = pdal.Select();
-            dgv_Products.DataSource = pdt;  
+            this.tblProductBindingSource.DataSource = businessLogicLayer.Select<TblProduct>(inventoryManagerContext.TblProducts);
         }
 
         private void cmb_Category_SelectedIndexChanged(object sender, EventArgs e)
         {
             string category = cmb_Category.Text;
-            DataTable pdt = pdal.DisplayProductsByCategory(category);   
+            this.tblProductBindingSource.DataSource = businessLogicLayer.Search<TblProduct>(inventoryManagerContext.TblProducts, p => p.Category == category);
 
-            dgv_Products.DataSource = pdt;  
         }
 
         private void btn_ShowAll_Click(object sender, EventArgs e)
         {
-            DataTable pdt = pdal.Select();
-            dgv_Products.DataSource = pdt;
+            //Display all products
+            this.tblProductBindingSource.DataSource = businessLogicLayer.Select<TblProduct>(inventoryManagerContext.TblProducts);
         }
     }
 }

@@ -1,0 +1,6 @@
+C:\projects\C# projects\BillingApp\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\projects\C# projects\BillingApp\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.AssemblyReference.cache
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

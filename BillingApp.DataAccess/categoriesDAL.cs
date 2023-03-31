@@ -180,7 +180,7 @@ namespace BillingApp.DataAccess
             return isSuccessful;
         }
         #endregion
-        #region Methdd for Search Functionality
+        #region Method for Search Functionality
         public DataTable Search(string keywords)
         {
             //SqlConnection conn = new SqlConnection(myconnstrng);

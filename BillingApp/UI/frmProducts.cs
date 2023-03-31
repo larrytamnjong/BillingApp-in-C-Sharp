@@ -9,9 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using BillingApp.DataAccess;
-using BillingApp.DataModel;
+using DataAccessLayer.Model;
 
 namespace BillingApp.UI
 {
@@ -22,68 +20,55 @@ namespace BillingApp.UI
             InitializeComponent();
         }
 
-        //Create objects for DAL and BLL
-        productsDAL pdal = new productsDAL(); 
-        productsBLL p = new productsBLL();
 
-        //create user DAL object to be able to get user id
-        userDAL udal = new userDAL();
+        BusinessLogicLayer businessLogicLayer = new BusinessLogicLayer();
+        InventoryManagerContext inventoryManagerContext = new InventoryManagerContext();
+        TblProduct product = new TblProduct();
+
+
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-          
 
-        //Function to Load categories in Form Products load event is created from form load events
-        //Create new categoriesDAL object
-        categoriesDAL cdal = new categoriesDAL();
         private void frmProducts_Load(object sender, EventArgs e)
         {
-            //Creating Data Table to hold the categories from Database
-            DataTable categoriesDT = cdal.Select();
-            //Specify DataSource for Category ComboBox
-            cmb_Category.DataSource = categoriesDT;
-            cmb_Category.DisplayMember= "title";
-            cmb_Category.ValueMember= "title";
 
-            Console.WriteLine(cmb_Category.SelectedIndex);
+            cmb_Category.DataSource = businessLogicLayer.Select<TblCategory>(inventoryManagerContext.TblCategories);
+            cmb_Category.DisplayMember = "Title";
+            cmb_Category.ValueMember = "Title";
 
+            //Console.WriteLine(cmb_Category.SelectedIndex);
 
-            //Load data table
-            DataTable dt = pdal.Select();
-            dgv_products.DataSource = dt;
+            updateTable();
 
 
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            p.name = txt_Name.Text;
-            p.category = cmb_Category.Text;
-            p.description = txt_Description.Text;
-            p.rate = decimal.Parse(txt_Rate.Text);
-            p.qty = 0;
-            p.added_date = DateTime.Now;
-            //Getting username
-            String loggedUser = frmLogin.loggedIn;
-            userBLL usr = udal.GetUserIDByUsername(loggedUser);
-            p.added_by = usr.id;
+            product.Name = txt_Name.Text;
+            product.Category = cmb_Category.Text;
+            product.Description = txt_Description.Text;
+            product.Rate = decimal.Parse(txt_Rate.Text);
+            product.Qty = (decimal?)0.0;
+            product.AddedDate = DateTime.Now;
+            product.AddedBy = businessLogicLayer.GetUserID(frmLogin.loggedIn);
 
-            bool success = pdal.Insert(p);
-            if(success == true)
+            bool success = businessLogicLayer.Insert<TblProduct>(product);
+            if (success == true)
             {
                 MessageBox.Show("Product Was Inserted Successfully");
                 Clear();
                 //Refresh DataTable
-                DataTable  dt = pdal.Select();  
-                dgv_products.DataSource = dt;   
+                updateTable();
             }
             else
             {
                 MessageBox.Show("Failed to Add New Product");
             }
 
-           
+
 
         }
 
@@ -93,10 +78,13 @@ namespace BillingApp.UI
             txt_Name.Text = "";
             txt_ProductID.Text = "";
             txt_Rate.Text = "";
-           
+
 
         }
-
+        public void updateTable()
+        {
+            this.tblProductBindingSource1.DataSource = businessLogicLayer.Select<TblProduct>(inventoryManagerContext.TblProducts);
+        }
         private void dgv_products_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             //Integer variable to know which product was clicked
@@ -112,25 +100,24 @@ namespace BillingApp.UI
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            p.id = int.Parse(txt_ProductID.Text);   
-            p.name = txt_Name.Text;
-            p.description = txt_Description.Text;
-            p.category = cmb_Category.Text;
-            p.rate = decimal.Parse(txt_Rate.Text);
-            p.added_date= DateTime.Now;
+            product.Id = int.Parse(txt_ProductID.Text);
+            product.Name = txt_Name.Text;
+            product.Description = txt_Description.Text;
+            product.Category = cmb_Category.Text;
+            product.Rate = decimal.Parse(txt_Rate.Text);
+            product.AddedDate = DateTime.Now;
             //Getting username
-            String loggedUser = frmLogin.loggedIn;
-            userBLL usr = udal.GetUserIDByUsername(loggedUser);
-            p.added_by = usr.id;
 
-            bool successful = pdal.Update(p);
-            if(successful == true)
+
+            product.AddedBy = businessLogicLayer.GetUserID(frmLogin.loggedIn);
+
+            bool successful = businessLogicLayer.Update<TblProduct>(product);
+            if (successful == true)
             {
                 MessageBox.Show("Product updated successfully");
                 Clear();
                 //Refresh DataTable
-                DataTable dt = pdal.Select();
-                dgv_products.DataSource = dt;
+                updateTable();
 
             }
             else
@@ -144,16 +131,15 @@ namespace BillingApp.UI
         {
             //Get id of product of to be deleted
 
-            p.id = int.Parse(txt_ProductID.Text);
+            product.Id = int.Parse(txt_ProductID.Text);
 
-            bool succesful = pdal.Delete(p);
-            if(succesful == true)
+            bool succesful = businessLogicLayer.Delete<TblProduct>(product);
+            if (succesful == true)
             {
                 MessageBox.Show("Product has been successfully deleted");
                 Clear();
                 //Refresh DataTable
-                DataTable dt = pdal.Select();
-                dgv_products.DataSource = dt;
+                updateTable();
             }
             else
             {
@@ -166,18 +152,20 @@ namespace BillingApp.UI
             //Get search keywords
             string keywords = txt_Search.Text;
 
-            if(keywords != null)
+            if (keywords != null)
             {
-                DataTable dt = pdal.Search(keywords);
-                dgv_products.DataSource = dt;
+                this.tblProductBindingSource1.DataSource = businessLogicLayer.Search<TblProduct>(inventoryManagerContext.TblProducts, p => p.Name == keywords.ToString());
             }
             else
             {
-                DataTable dt = pdal.Select();
-                dgv_products.DataSource = dt;
+                updateTable();
             }
         }
 
-        
+        private void cmb_Category_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show(cmb_Category.SelectedIndex.ToString());
+            //updateTable();
+        }
     }
 }

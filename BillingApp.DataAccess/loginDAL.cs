@@ -13,13 +13,14 @@ namespace BillingApp.DataAccess
         //Static string to connect to database
         static string myconnstrng = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
 
+
         public bool loginCheck(loginBLL l)
         {
             bool isSuccesful = false;
-            
+
             //Connect to to database
-         //SqlConnection conn = new SqlConnection(myconnstrng);
-          MySqlConnection conn = new MySqlConnection(myconnstrng);
+            //SqlConnection conn = new SqlConnection(myconnstrng);
+            MySqlConnection conn = new MySqlConnection(myconnstrng);
       
             try
             {

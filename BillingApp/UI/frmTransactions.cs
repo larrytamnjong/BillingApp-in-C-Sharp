@@ -9,8 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using BillingApp.DataAccess;
-using BillingApp.DataModel;
+using DataAccessLayer.Model;
 
 namespace BillingApp.UI
 {
@@ -20,8 +19,8 @@ namespace BillingApp.UI
         {
             InitializeComponent();
         }
-
-        transactionDAL tDal = new transactionDAL(); 
+        BusinessLogicLayer businessLogicLayer = new BusinessLogicLayer();
+        InventoryManagerContext inventoryManagerContext = new InventoryManagerContext();
 
 
         private void pictureBox3_Click(object sender, EventArgs e)
@@ -31,23 +30,21 @@ namespace BillingApp.UI
 
         private void frmTransactions_Load(object sender, EventArgs e)
         {
-            DataTable dt = tDal.DisplayAllTransactions();   
-            dgv_transaction.DataSource = dt;
+
+            this.tblTransactionBindingSource.DataSource = businessLogicLayer.Select<TblTransaction>(inventoryManagerContext.TblTransactions);
         }
 
         private void cmb_TransactionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             string type = cmb_TransactionType.Text;
 
-            DataTable dt = tDal.DisplayTransactionByType(type);
-            dgv_transaction.DataSource = dt;    
+            this.tblTransactionBindingSource.DataSource = businessLogicLayer.Search<TblTransaction>(inventoryManagerContext.TblTransactions, t => t.Type == type);
 
         }
 
         private void btn_ShowAll_Click(object sender, EventArgs e)
         {
-            DataTable dt = tDal.DisplayAllTransactions();
-            dgv_transaction.DataSource = dt;
+            this.tblTransactionBindingSource.DataSource = businessLogicLayer.Select<TblTransaction>(inventoryManagerContext.TblTransactions);
         }
     }
 }

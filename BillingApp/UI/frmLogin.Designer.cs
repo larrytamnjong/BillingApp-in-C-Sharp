@@ -29,147 +29,150 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.cmb_UserType = new System.Windows.Forms.ComboBox();
-            this.lblUserType = new System.Windows.Forms.Label();
-            this.txt_Password = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.txt_Username = new System.Windows.Forms.TextBox();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.lblHeader = new System.Windows.Forms.Label();
-            this.closeIcon = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.closeIcon)).BeginInit();
-            this.SuspendLayout();
+            panel1 = new System.Windows.Forms.Panel();
+            btnLogin = new System.Windows.Forms.Button();
+            cmb_UserType = new System.Windows.Forms.ComboBox();
+            lblUserType = new System.Windows.Forms.Label();
+            txt_Password = new System.Windows.Forms.TextBox();
+            lblPassword = new System.Windows.Forms.Label();
+            txt_Username = new System.Windows.Forms.TextBox();
+            lblUsername = new System.Windows.Forms.Label();
+            lblHeader = new System.Windows.Forms.Label();
+            closeIcon = new System.Windows.Forms.PictureBox();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)closeIcon).BeginInit();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.btnLogin);
-            this.panel1.Controls.Add(this.cmb_UserType);
-            this.panel1.Controls.Add(this.lblUserType);
-            this.panel1.Controls.Add(this.txt_Password);
-            this.panel1.Controls.Add(this.lblPassword);
-            this.panel1.Controls.Add(this.txt_Username);
-            this.panel1.Controls.Add(this.lblUsername);
-            this.panel1.Controls.Add(this.lblHeader);
-            this.panel1.Location = new System.Drawing.Point(47, 34);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(437, 580);
-            this.panel1.TabIndex = 0;
+            panel1.BackColor = System.Drawing.Color.White;
+            panel1.Controls.Add(btnLogin);
+            panel1.Controls.Add(cmb_UserType);
+            panel1.Controls.Add(lblUserType);
+            panel1.Controls.Add(txt_Password);
+            panel1.Controls.Add(lblPassword);
+            panel1.Controls.Add(txt_Username);
+            panel1.Controls.Add(lblUsername);
+            panel1.Controls.Add(lblHeader);
+            panel1.Location = new System.Drawing.Point(47, 42);
+            panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(437, 725);
+            panel1.TabIndex = 0;
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.DarkGreen;
-            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnLogin.Location = new System.Drawing.Point(76, 460);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(258, 62);
-            this.btnLogin.TabIndex = 7;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            btnLogin.BackColor = System.Drawing.Color.DarkGreen;
+            btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnLogin.ForeColor = System.Drawing.SystemColors.Info;
+            btnLogin.Location = new System.Drawing.Point(76, 575);
+            btnLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new System.Drawing.Size(258, 78);
+            btnLogin.TabIndex = 7;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
             // cmb_UserType
             // 
-            this.cmb_UserType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmb_UserType.FormattingEnabled = true;
-            this.cmb_UserType.Items.AddRange(new object[] {
-            "Admin",
-            "User"});
-            this.cmb_UserType.Location = new System.Drawing.Point(76, 377);
-            this.cmb_UserType.Name = "cmb_UserType";
-            this.cmb_UserType.Size = new System.Drawing.Size(258, 28);
-            this.cmb_UserType.TabIndex = 6;
+            cmb_UserType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            cmb_UserType.FormattingEnabled = true;
+            cmb_UserType.Items.AddRange(new object[] { "Admin", "User" });
+            cmb_UserType.Location = new System.Drawing.Point(76, 471);
+            cmb_UserType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cmb_UserType.Name = "cmb_UserType";
+            cmb_UserType.Size = new System.Drawing.Size(258, 28);
+            cmb_UserType.TabIndex = 6;
             // 
             // lblUserType
             // 
-            this.lblUserType.AutoSize = true;
-            this.lblUserType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserType.Location = new System.Drawing.Point(72, 339);
-            this.lblUserType.Name = "lblUserType";
-            this.lblUserType.Size = new System.Drawing.Size(81, 20);
-            this.lblUserType.TabIndex = 5;
-            this.lblUserType.Text = "UserType";
+            lblUserType.AutoSize = true;
+            lblUserType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblUserType.Location = new System.Drawing.Point(72, 424);
+            lblUserType.Name = "lblUserType";
+            lblUserType.Size = new System.Drawing.Size(81, 20);
+            lblUserType.TabIndex = 5;
+            lblUserType.Text = "UserType";
             // 
             // txt_Password
             // 
-            this.txt_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Password.Location = new System.Drawing.Point(76, 276);
-            this.txt_Password.Name = "txt_Password";
-            this.txt_Password.PasswordChar = '#';
-            this.txt_Password.Size = new System.Drawing.Size(258, 27);
-            this.txt_Password.TabIndex = 4;
+            txt_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            txt_Password.Location = new System.Drawing.Point(76, 345);
+            txt_Password.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            txt_Password.Name = "txt_Password";
+            txt_Password.PasswordChar = '#';
+            txt_Password.Size = new System.Drawing.Size(258, 27);
+            txt_Password.TabIndex = 4;
             // 
             // lblPassword
             // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(75, 239);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(83, 20);
-            this.lblPassword.TabIndex = 3;
-            this.lblPassword.Text = "Password";
+            lblPassword.AutoSize = true;
+            lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblPassword.Location = new System.Drawing.Point(75, 299);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new System.Drawing.Size(83, 20);
+            lblPassword.TabIndex = 3;
+            lblPassword.Text = "Password";
             // 
             // txt_Username
             // 
-            this.txt_Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Username.Location = new System.Drawing.Point(76, 184);
-            this.txt_Username.Name = "txt_Username";
-            this.txt_Username.Size = new System.Drawing.Size(258, 27);
-            this.txt_Username.TabIndex = 2;
+            txt_Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            txt_Username.Location = new System.Drawing.Point(76, 230);
+            txt_Username.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            txt_Username.Name = "txt_Username";
+            txt_Username.Size = new System.Drawing.Size(258, 27);
+            txt_Username.TabIndex = 2;
             // 
             // lblUsername
             // 
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(72, 145);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(86, 20);
-            this.lblUsername.TabIndex = 1;
-            this.lblUsername.Text = "Username";
+            lblUsername.AutoSize = true;
+            lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblUsername.Location = new System.Drawing.Point(72, 181);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new System.Drawing.Size(86, 20);
+            lblUsername.TabIndex = 1;
+            lblUsername.Text = "Username";
             // 
             // lblHeader
             // 
-            this.lblHeader.AutoSize = true;
-            this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.Location = new System.Drawing.Point(169, 56);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(92, 29);
-            this.lblHeader.TabIndex = 0;
-            this.lblHeader.Text = "LOGIN";
+            lblHeader.AutoSize = true;
+            lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblHeader.Location = new System.Drawing.Point(169, 70);
+            lblHeader.Name = "lblHeader";
+            lblHeader.Size = new System.Drawing.Size(92, 29);
+            lblHeader.TabIndex = 0;
+            lblHeader.Text = "LOGIN";
             // 
             // closeIcon
             // 
-            this.closeIcon.Image = ((System.Drawing.Image)(resources.GetObject("closeIcon.Image")));
-            this.closeIcon.Location = new System.Drawing.Point(503, 4);
-            this.closeIcon.Name = "closeIcon";
-            this.closeIcon.Size = new System.Drawing.Size(37, 37);
-            this.closeIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.closeIcon.TabIndex = 1;
-            this.closeIcon.TabStop = false;
-            this.closeIcon.Click += new System.EventHandler(this.closeIcon_Click);
+            closeIcon.Image = (System.Drawing.Image)resources.GetObject("closeIcon.Image");
+            closeIcon.Location = new System.Drawing.Point(503, 5);
+            closeIcon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            closeIcon.Name = "closeIcon";
+            closeIcon.Size = new System.Drawing.Size(37, 46);
+            closeIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            closeIcon.TabIndex = 1;
+            closeIcon.TabStop = false;
+            closeIcon.Click += closeIcon_Click;
             // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.ClientSize = new System.Drawing.Size(552, 652);
-            this.Controls.Add(this.closeIcon);
-            this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmLogin";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmLogin";
-            
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.closeIcon)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.MediumSeaGreen;
+            ClientSize = new System.Drawing.Size(552, 815);
+            Controls.Add(closeIcon);
+            Controls.Add(panel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Name = "frmLogin";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "frmLogin";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)closeIcon).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

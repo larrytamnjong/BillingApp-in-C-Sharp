@@ -3,4 +3,36 @@
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="UI\frmAdminDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\frmCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\frmDeaCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\frmInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\frmProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\frmPurchaseAndSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\frmTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\userDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

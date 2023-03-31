@@ -9,8 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BillingApp.DataAccess;
-using BillingApp.DataModel;
+
+
 
 namespace BillingApp.UI
 {
@@ -20,10 +20,10 @@ namespace BillingApp.UI
         {
             InitializeComponent();
         }
+        BusinessLogicLayer login = new BusinessLogicLayer();
 
-        loginBLL l = new loginBLL();
-        loginDAL dal = new loginDAL();
-        public static string loggedIn;
+
+        public static string loggedIn = "";
         private void closeIcon_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -31,19 +31,15 @@ namespace BillingApp.UI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //Trim() is a string method. This method is used to removes all leading and trailing white-space characters from the current String object. 
 
-            l.username = txt_Username.Text.Trim();
-            l.password = txt_Password.Text.Trim();
-            l.user_type = cmb_UserType.Text;
 
-            bool success = dal.loginCheck(l);
-            if(success == true)
+            bool success = login.Login(txt_Username.Text, txt_Password.Text, cmb_UserType.Text);
+            if (success == true)
             {
                 MessageBox.Show("Login was Successful");
-                loggedIn = l.username;
+                loggedIn = txt_Username.Text.ToUpper();
 
-                switch (l.user_type)
+                switch (cmb_UserType.Text)
                 {
                     case "Admin":
                         {
@@ -58,12 +54,14 @@ namespace BillingApp.UI
                             user.Show();
                             this.Hide();
 
-                        } break;
+                        }
+                        break;
                     default:
                         {
                             MessageBox.Show("Invalid user_type");
 
-                        }break;
+                        }
+                        break;
                 }
             }
             else
@@ -72,6 +70,6 @@ namespace BillingApp.UI
             }
         }
 
-       
+      
     }
 }

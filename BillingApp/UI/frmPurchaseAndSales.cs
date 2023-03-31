@@ -1,11 +1,11 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Transactions;
 using System.Windows.Forms;
-using BillingApp.DataAccess;
-using BillingApp.DataModel;
+using DataAccessLayer.Model;
 
 namespace BillingApp.UI
 {
@@ -15,13 +15,14 @@ namespace BillingApp.UI
         {
             InitializeComponent();
         }
-        deaCustDAL dcDAL = new deaCustDAL();
-        productsDAL pDAL = new productsDAL();
-        userDAL uDAL = new userDAL();   
-        transactionDAL tDAL = new transactionDAL();
-        transactionDetailDAL tdDAL = new transactionDetailDAL();
+      
 
         DataTable transactionDT = new DataTable();
+
+        InventoryManagerContext inventoryManagerContext = new InventoryManagerContext();
+     
+        BusinessLogicLayer businessLogicLayer = new BusinessLogicLayer();
+
         private void picClose_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -42,7 +43,7 @@ namespace BillingApp.UI
         {
             //Get keyword from the text box
             string keyword = txt_Search.Text;
-            if(keyword == "")
+            if (keyword == "")
             {
                 txt_Name.Text = "";
                 txt_Contact.Text = "";
@@ -52,12 +53,15 @@ namespace BillingApp.UI
             else
             {
                 //Get details if not null and set values 
-                deaCustBLL dc = dcDAL.SearchDealerCustomerForTransaction(keyword);
+                var dealerCustomer = businessLogicLayer.Search<TblDeaCust>(inventoryManagerContext.TblDeaCusts, dc => dc.Name == keyword);
+                foreach (var deaCust in (List<TblDeaCust>)dealerCustomer)
+                {
+                    txt_Name.Text = deaCust.Name;
+                    txt_Email.Text = deaCust.Email;
+                    txt_Address.Text = deaCust.Address;
+                    txt_Contact.Text = deaCust.Contact;
 
-                txt_Name.Text = dc.name;
-                txt_Email.Text = dc.email;
-                txt_Address.Text = dc.address;
-                txt_Contact.Text = dc.contact;
+                }
             }
         }
 
@@ -65,7 +69,8 @@ namespace BillingApp.UI
         {
             string keyword = txt_ProductSearch.Text;
 
-            if(keyword == ""){
+            if (keyword == "")
+            {
                 txt_ProductName.Text = "";
                 txt_Inventory.Text = "";
                 txt_Rate.Text = "";
@@ -73,10 +78,16 @@ namespace BillingApp.UI
             }
             else
             {
-                productsBLL p = pDAL.GetProductsForTransaction(keyword);
-                txt_ProductName.Text = p.name;
-                txt_Inventory.Text = p.qty.ToString();
-                txt_Rate.Text = p.rate.ToString();
+
+
+                var product = businessLogicLayer.Search<TblProduct>(inventoryManagerContext.TblProducts, p => p.Name == keyword);
+                foreach (var prod in (List<TblProduct>)product)
+                {
+                    txt_ProductName.Text = prod.Name;
+                    txt_Inventory.Text = prod.Qty.ToString();
+                    txt_Rate.Text = prod.Rate.ToString();
+
+                }
             }
         }
 
@@ -92,7 +103,7 @@ namespace BillingApp.UI
             decimal subTotal = decimal.Parse(txt_SubTotal.Text);
             subTotal = subTotal + total;
             //Check to make sure product is selected
-            if(productName == "")
+            if (productName == "")
             {
                 MessageBox.Show("No product has been selected");
             }
@@ -101,7 +112,7 @@ namespace BillingApp.UI
                 //Create dataTable at top level because if you create datatable at this level for each product a new table will created
                 transactionDT.Rows.Add(productName, rate, qty, total);
 
-                dgv_Added_Products.DataSource= transactionDT;
+                dgv_Added_Products.DataSource = transactionDT;
                 //Display Subtotal 
                 txt_SubTotal.Text = subTotal.ToString();
                 //Clear Text Boxes
@@ -117,7 +128,7 @@ namespace BillingApp.UI
         {
             string value = txt_Discount.Text;
 
-            if(value == "")
+            if (value == "")
             {
                 MessageBox.Show("Please Add Discount First!");
             }
@@ -135,7 +146,7 @@ namespace BillingApp.UI
         private void txt_Vat_TextChanged(object sender, EventArgs e)
         {
             string check = txt_GrandTotal.Text;
-            if(check == "")
+            if (check == "")
             {
                 MessageBox.Show("Calculate the discount and set the Grand total first");
             }
@@ -163,72 +174,63 @@ namespace BillingApp.UI
         {
             //Get the values from Purchases and Sales Form First
 
-            transactionsBLL transaction = new transactionsBLL();
-            transaction.type = lbl_top.Text;
+            //transactionsBLL transaction = new transactionsBLL();
+            TblTransaction transaction = new TblTransaction();
+            transaction.Type = lbl_top.Text;
 
             //Get the ID of the Dealer or Customer
             //Let's get name of the dealer or customer first
             string deaCustName = txt_Name.Text;
-            deaCustBLL dc = dcDAL.GetDeaCustIDFromName(deaCustName);
-            transaction.dea_cust_id = dc.id;
-            transaction.grandTotal = Math.Round(decimal.Parse(txt_GrandTotal.Text),2);      
-            transaction.transaction_date= DateTime.Now; 
-            transaction.tax = decimal.Parse(txt_Vat.Text);
-            transaction.discount = decimal.Parse(txt_Discount.Text);
+            //deaCustBLL dc = dcDAL.GetDeaCustIDFromName(deaCustName);
+            transaction.DeaCustId = 1;
+            transaction.GrandTotal = Math.Round(decimal.Parse(txt_GrandTotal.Text), 2);
+            transaction.TransactionDate = DateTime.Now;
+            transaction.Tax = decimal.Parse(txt_Vat.Text);
+            transaction.Discount = decimal.Parse(txt_Discount.Text);
 
             //Get the username of logged in user
-            string username = frmLogin.loggedIn;
-            userBLL u = uDAL.GetUserIDByUsername(username);
-
-            transaction.added_by = u.id;
-            transaction.transactionDetails = transactionDT;
+           transaction.AddedBy = businessLogicLayer.GetUserID(frmLogin.loggedIn);
 
             bool isSuccessful = false;
 
-            //Add transactions in references inorder to use TransactionScope
-            using(TransactionScope scope = new TransactionScope())
-            {
-                int transactionID = -1;
-                //create a boolean value and insert transaction
-                bool w = tDAL.Insert_Transaction(transaction, out transactionID);
-
+           
                 //Use for loop to insert Transaction Details
                 for (int i = 0; i < transactionDT.Rows.Count; i++)
                 {
-                    transationDetailsBLL transationDetails = new transationDetailsBLL();
+                    TblTransactionDetail transactionDetails = new TblTransactionDetail();
                     //Get the product name and convert it to id
                     string productName = transactionDT.Rows[i][0].ToString();
-                    productsBLL p = pDAL.GetProductIDFromName(productName);
-
-                    transationDetails.product_id = p.id;
-                    transationDetails.rate = decimal.Parse(transactionDT.Rows[i][1].ToString());
-                    transationDetails.qty = decimal.Parse(transactionDT.Rows[i][2].ToString());
-                    transationDetails.total = Math.Round(decimal.Parse(transactionDT.Rows[i][3].ToString()),2);
-                    transationDetails.dea_cust_id = dc.id;
-                    transationDetails.added_date = DateTime.Now;
-                    transationDetails.added_by = u.id;
+                   
+                    
+                    transactionDetails.ProductId = 1;
+                    transactionDetails.Rate = decimal.Parse(transactionDT.Rows[i][1].ToString());
+                    transactionDetails.Qty = decimal.Parse(transactionDT.Rows[i][2].ToString());
+                    transactionDetails.Total = Math.Round(decimal.Parse(transactionDT.Rows[i][3].ToString()), 2);
+                    transactionDetails.DeaCustId = 1;
+                    transactionDetails.AddedDate = DateTime.Now;
+                    transactionDetails.AddedBy = 1;
 
                     //Increase of Decrease Product Quantity based on Purchase of sales
                     string transactionType = lbl_top.Text;
-                    bool x = false;
-                    if(transactionType == "PURCHASE MANAGEMENT")
+                    bool x = true;
+                    if (transactionType == "PURCHASE MANAGEMENT")
                     {
-                         x = pDAL.IncreaseProduct(transationDetails.product_id, transationDetails.qty);
+                       // x = pDAL.IncreaseProduct(transationDetails.product_id, transationDetails.qty);
                     }
                     else
                     {
-                         x = pDAL.DecreaseProduct(transationDetails.product_id, transationDetails.qty);
+                       // x = pDAL.DecreaseProduct(transationDetails.product_id, transationDetails.qty);
                     }
 
 
-                    //Insert Transaction Details inside the database
-                    bool y = tdDAL.InsertTransactionDetail(transationDetails);
-                    isSuccessful = w && y && x;
+                //Insert Transaction Details inside the database
+                bool y = businessLogicLayer.Insert<TblTransactionDetail>(transactionDetails); ;
+                    isSuccessful = y && x;
 
                 }
                 if (isSuccessful == true)
                 {
-                    scope.Complete();
+                    
                     //Code to print Bill
 
                     var printer = new DGVPrinter();
@@ -237,9 +239,9 @@ namespace BillingApp.UI
                     printer.SubTitleFormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoClip;
                     printer.PageNumbers = true;
                     printer.PageNumberInHeader = false;
-                    printer.PorportionalColumns= true;
-                    printer.HeaderCellAlignment= StringAlignment.Center;
-                    printer.Footer = "Discount: "+ txt_Discount.Text + "% \r\n" + "VAT: " + txt_Vat.Text + "% \r\n" + "Grand Total: "+ txt_GrandTotal.Text + "\r\n\r\n" + "Thank you for doing buisness.";
+                    printer.PorportionalColumns = true;
+                    printer.HeaderCellAlignment = StringAlignment.Center;
+                    printer.Footer = "Discount: " + txt_Discount.Text + "% \r\n" + "VAT: " + txt_Vat.Text + "% \r\n" + "Grand Total: " + txt_GrandTotal.Text + "\r\n\r\n" + "Thank you for doing buisness.";
                     printer.FooterSpacing = 15;
                     printer.PrintDataGridView(dgv_Added_Products);
 
@@ -256,11 +258,11 @@ namespace BillingApp.UI
                     txt_Contact.Text = "";
                     txt_Discount.Text = "0";
                     txt_ProductSearch.Text = "";
-                    txt_Quantity.Text= "0";
+                    txt_Quantity.Text = "0";
                     txt_ReturnAmount.Text = "0";
-                    txt_SubTotal .Text = "0";   
+                    txt_SubTotal.Text = "0";
                     txt_GrandTotal.Text = "0";
-                    txt_Vat.Text = "0"; 
+                    txt_Vat.Text = "0";
                     txt_Rate.Text = "0";
                     txt_Inventory.Text = "0";
                     txt_Address.Text = "";
@@ -273,7 +275,7 @@ namespace BillingApp.UI
                 {
                     MessageBox.Show("Transaction failed");
                 }
-            }
+          
 
         }
 

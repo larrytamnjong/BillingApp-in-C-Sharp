@@ -1,6 +1,5 @@
-﻿using BillingApp.DataAccess;
-using BillingApp.DataModel;
-
+﻿
+using DataAccessLayer.Model;
 using System;
 using System.Data;
 using System.Linq;
@@ -14,10 +13,10 @@ namespace BillingApp.UI
         {
             InitializeComponent();
         }
-        //Create objects for CategoryBLL and CategoryDLL
-        categoriesBLL c = new categoriesBLL();
-        categoriesDAL dal = new categoriesDAL();
-        userDAL udal = new userDAL();
+
+        InventoryManagerContext inventoryManagerContext = new InventoryManagerContext();
+        TblCategory category = new TblCategory();
+        BusinessLogicLayer businessLogicLayer = new BusinessLogicLayer();
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -26,28 +25,27 @@ namespace BillingApp.UI
         private void btn_Add_Click(object sender, EventArgs e)
         {
             //Get values from Category Form
-            c.title = txt_Title.Text;
-            c.description = txt_Description.Text;
-            c.added_date = DateTime.Now;
+            category.Title = txt_Title.Text;
+            category.Description = txt_Description.Text;
+            category.AddedDate = DateTime.Now;
 
             //Getting ID of Logged in User
             string loggedInUser = frmLogin.loggedIn;
-            userBLL usr = udal.GetUserIDByUsername(loggedInUser);
+
 
             //Passing the id of Logged in user in the added by field
-            c.added_by = usr.id;
+            category.AddedBy = businessLogicLayer.GetUserID(loggedInUser);
 
             //Creating Boolean method to insert data into database
 
-            bool success = dal.Insert(c);
+            bool success = businessLogicLayer.Insert<TblCategory>(category);
 
             //Insert successful will return true else function will return false
-            if(success== true)
+            if (success == true)
             {
                 MessageBox.Show("Category Successfully Inserted");
                 clear();
-                DataTable dt = dal.Select();
-                dgv_Categories.DataSource = dt;
+                updateTable();
             }
             else
             {
@@ -55,6 +53,10 @@ namespace BillingApp.UI
             }
 
 
+        }
+        public void updateTable()
+        {
+            this.tblCategoryBindingSource.DataSource = businessLogicLayer.Select<TblCategory>(inventoryManagerContext.TblCategories);
         }
         public void clear()
         {
@@ -67,8 +69,7 @@ namespace BillingApp.UI
         private void frmCategory_Load(object sender, EventArgs e)
         {
             //Display category in DataTable
-            DataTable dt = dal.Select();
-            dgv_Categories.DataSource = dt;
+            updateTable();
         }
 
         private void dgv_Categories_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -83,26 +84,24 @@ namespace BillingApp.UI
         private void btn_Update_Click(object sender, EventArgs e)
         {
             //Get values from category form
-            c.id = int.Parse(txt_CategoryID.Text);
-            c.title = txt_Title.Text;
-            c.description = txt_Description.Text;
-            c.added_date = DateTime.Now;
+            category.Id = int.Parse(txt_CategoryID.Text);
+            category.Title = txt_Title.Text;
+            category.Description = txt_Description.Text;
+            category.AddedDate = DateTime.Now;
 
             //Getting ID of Logged in User
             string loggedInUser = frmLogin.loggedIn;
-            userBLL usr = udal.GetUserIDByUsername(loggedInUser);
 
             //Passing the id of Logged in user in the added by field
-            c.added_by = usr.id;
+            category.AddedBy = businessLogicLayer.GetUserID(loggedInUser);
 
-            bool successful = dal.Update(c);
+            bool successful = businessLogicLayer.Update<TblCategory>(category);
             if (successful == true)
             {
                 MessageBox.Show("Category successfully upgraded");
                 clear();
                 //Display category in DataTable
-                DataTable dt = dal.Select();
-                dgv_Categories.DataSource = dt;
+                updateTable();
             }
             else
             {
@@ -114,16 +113,15 @@ namespace BillingApp.UI
         {
             //Get the ID of the Category we want to delete
 
-            c.id = int.Parse(txt_CategoryID.Text);
+            category.Id = int.Parse(txt_CategoryID.Text);
 
-            bool successful = dal.Delete(c);
+            bool successful = businessLogicLayer.Delete<TblCategory>(category);
             if (successful == true)
             {
                 MessageBox.Show("Deleted");
                 clear();
                 //Display category in DataTable
-                DataTable dt = dal.Select();
-                dgv_Categories.DataSource = dt;
+                updateTable();
             }
             else
             {
@@ -138,16 +136,13 @@ namespace BillingApp.UI
             string keywords = txt_Search.Text;
             //Filter the categories based on the keywords
 
-            if(keywords != null)
+            if (keywords != null)
             {
-                DataTable dt = dal.Search(keywords);
-                dgv_Categories.DataSource = dt;
+                this.tblCategoryBindingSource.DataSource = businessLogicLayer.Search<TblCategory>(inventoryManagerContext.TblCategories, c => c.Title == keywords.ToString());
             }
             else
             {
-              
-                DataTable dt = dal.Select();
-                dgv_Categories.DataSource = dt;
+                updateTable();
             }
         }
     }

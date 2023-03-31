@@ -1,6 +1,5 @@
-﻿using BillingApp.DataAccess;
-using BillingApp.DataModel;
-
+﻿
+using DataAccessLayer.Model;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -13,9 +12,11 @@ namespace BillingApp.UI
         {
             InitializeComponent();
         }
-        private deaCustBLL dc = new deaCustBLL();
-        private deaCustDAL dcDal = new deaCustDAL();
-        private userDAL uDal = new userDAL();
+
+        BusinessLogicLayer businessLogicLayer = new BusinessLogicLayer();
+        TblDeaCust deaCust = new TblDeaCust();
+        InventoryManagerContext inventoryManagerContext = new InventoryManagerContext();
+
         private void picClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -23,23 +24,22 @@ namespace BillingApp.UI
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            dc.type = cmb_Type.Text;
-            dc.name = txt_Name.Text;
-            dc.email= txt_Email.Text;
-            dc.contact = txt_Contact.Text;  
-            dc.address = txt_Address.Text;
-            dc.added_date = DateTime.Now;
-            
-            //Getting id of current user from username
-            userBLL usr = uDal.GetUserIDByUsername(frmLogin.loggedIn);
-            dc.added_by = usr.id;
+            deaCust.Type = cmb_Type.Text;
+            deaCust.Name = txt_Name.Text;
+            deaCust.Email = txt_Email.Text;
+            deaCust.Contact = txt_Contact.Text;
+            deaCust.Address = txt_Address.Text;
+            deaCust.AddedDate = DateTime.Now;
 
-            bool success = dcDal.Insert(dc);
-            if(success == true)
+            //Getting id of current user from username
+            deaCust.AddedBy = businessLogicLayer.GetUserID(frmLogin.loggedIn);
+
+            bool success = businessLogicLayer.Insert<TblDeaCust>(deaCust);
+            if (success == true)
             {
                 MessageBox.Show("Dealer or Customer Inserted Successfully");
                 clear();
-                refreshGridTable();
+                updateTable();
 
             }
             else
@@ -57,21 +57,20 @@ namespace BillingApp.UI
             txt_DeaCustID.Text = "";
 
         }
-      public void refreshGridTable()
+        public void updateTable()
         {
-            DataTable dt = dcDal.Select();
-           dgv_DeaCust.DataSource= dt;  
+            this.tblDeaCustBindingSource.DataSource = businessLogicLayer.Select<TblDeaCust>(inventoryManagerContext.TblDeaCusts);
 
         }
 
         private void frmDeaCust_Load(object sender, EventArgs e)
         {
-            refreshGridTable();
+            updateTable();
         }
 
         private void dgv_DeaCust_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int rowIndex = e.RowIndex; 
+            int rowIndex = e.RowIndex;
             txt_DeaCustID.Text = dgv_DeaCust.Rows[rowIndex].Cells[0].Value.ToString();
             cmb_Type.Text = dgv_DeaCust.Rows[rowIndex].Cells[1].Value.ToString();
             txt_Name.Text = dgv_DeaCust.Rows[rowIndex].Cells[2].Value.ToString();
@@ -82,23 +81,23 @@ namespace BillingApp.UI
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            dc.id = int.Parse(txt_DeaCustID.Text);
-            dc.type = cmb_Type.Text;
-            dc.name = txt_Name.Text;
-            dc.email = txt_Email.Text;
-            dc.contact= txt_Contact.Text;
-            dc.address = txt_Address.Text;
-            dc.added_date= DateTime.Now;
+            deaCust.Id = int.Parse(txt_DeaCustID.Text);
+            deaCust.Type = cmb_Type.Text;
+            deaCust.Name = txt_Name.Text;
+            deaCust.Email = txt_Email.Text;
+            deaCust.Contact = txt_Contact.Text;
+            deaCust.Address = txt_Address.Text;
+            deaCust.AddedDate = DateTime.Now;
             //Getting id of current user from username
-            userBLL usr = uDal.GetUserIDByUsername(frmLogin.loggedIn);
-            dc.added_by = usr.id;
 
-            bool successful = dcDal.Update(dc);
-            if(successful == true) 
+            deaCust.AddedBy = businessLogicLayer.GetUserID(frmLogin.loggedIn);
+
+            bool successful = businessLogicLayer.Update<TblDeaCust>(deaCust);
+            if (successful == true)
             {
                 MessageBox.Show("Dealer of customer updated successfully");
                 clear();
-                refreshGridTable(); 
+                updateTable();
             }
             else
             {
@@ -108,14 +107,14 @@ namespace BillingApp.UI
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-            dc.id = int.Parse(txt_DeaCustID.Text);
+            deaCust.Id = int.Parse(txt_DeaCustID.Text);
 
-            bool success = dcDal.Delete(dc);    
-            if(success == true)
+            bool success = businessLogicLayer.Delete<TblDeaCust>(deaCust);
+            if (success == true)
             {
                 MessageBox.Show("Dealer of Customer Deleted");
                 clear();
-                refreshGridTable(); 
+                updateTable();
             }
             else
             {
@@ -127,14 +126,14 @@ namespace BillingApp.UI
         {
             string keywords = txt_Search.Text;
 
-            if(keywords != null)
+            if (keywords != null)
             {
-                DataTable dt = dcDal.Search(keywords);
-                dgv_DeaCust.DataSource = dt;    
+                this.tblDeaCustBindingSource.DataSource = businessLogicLayer.Search<TblDeaCust>(inventoryManagerContext.TblDeaCusts, dc => dc.Name == keywords.ToString());
+
             }
             else
             {
-                refreshGridTable();
+                updateTable();
             }
         }
     }

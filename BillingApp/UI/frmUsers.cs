@@ -1,11 +1,9 @@
-﻿
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-using BillingApp.DataAccess;
-using BillingApp.DataModel;
+using DataAccessLayer.Model;
 
 namespace BillingApp.UI
 {
@@ -15,9 +13,12 @@ namespace BillingApp.UI
         {
             InitializeComponent();
         }
-        //Create objects from userBLL and userDAL
-        userBLL u = new userBLL();
-        userDAL dal = new userDAL();
+
+
+
+        TblUser user = new TblUser();
+        BusinessLogicLayer businessLogicLayer = new BusinessLogicLayer();
+        InventoryManagerContext inventoryManagerContext = new InventoryManagerContext();
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -28,41 +29,40 @@ namespace BillingApp.UI
         {
 
 
-            //Getting data from the UI using userBLL
-            u.first_name = txt_FirstName.Text;
-            u.last_name = txt_LastName.Text;    
-            u.email = txt_Email.Text;
-            u.username = txt_Username.Text;
-            u.password = txt_Password.Text; 
-            u.contact = txt_Contact.Text;
-            u.address = txt_Address.Text;
-            u.gender = cmb_Gender.Text;
-            u.user_type = cmb_UserType.Text;
-            u.added_date = DateTime.Now;
+            //Getting data from the UI using object from TblUser
+            user.FirstName = txt_FirstName.Text;
+            user.LastName = txt_LastName.Text;
+            user.Email = txt_Email.Text;
+            user.Username = txt_Username.Text;
+            user.Password = txt_Password.Text;
+            user.Contact = txt_Contact.Text;
+            user.Address = txt_Address.Text;
+            user.Gender = cmb_Gender.Text;
+            user.UserType = cmb_UserType.Text;
+            user.AddedDate = DateTime.Now;
 
             //Getting username of the loggedin user
             String loggedInUser = frmLogin.loggedIn;
-            userBLL usr = dal.GetUserIDByUsername(loggedInUser);    
-            u.added_by = usr.id;
 
-            //Inserting Data into database using userDAL
+            //Get user Id of Logged in User
+            user.AddedBy = businessLogicLayer.GetUserID(loggedInUser);
 
-            bool success = dal.Insert(u);
+            //Inserting Data into database using 
 
-            if(success == true)
+            bool success = businessLogicLayer.Insert<TblUser>(user);
+
+            if (success == true)
             {
                 MessageBox.Show("User successfully created");
                 //Call clear method on successful user creation
                 clear();
+                updateUserTable();
             }
             else
             {
                 MessageBox.Show("Failed to add new user");
             }
 
-            //Refreshing Data Grid View
-            DataTable dt = dal.Select();
-            dgvUsers.DataSource = dt;
 
         }
 
@@ -70,9 +70,7 @@ namespace BillingApp.UI
         //Click on form select events from properties(The thunder bolt symbol) and double tap load
         private void frmUsers_Load(object sender, EventArgs e)
         {
-            //Create load event for page so data loads up on start
-            DataTable dt = dal.Select();
-            dgvUsers.DataSource = dt;
+            updateUserTable();
         }
 
         private void clear()
@@ -88,8 +86,13 @@ namespace BillingApp.UI
             txt_UserId.Text = "";
             txt_Username.Text = "";
 
+        }
 
-
+        private void updateUserTable()
+        {
+            //Fetch Data for user table
+            this.tblUserBindingSource1.DataSource = businessLogicLayer.Select<TblUser>(inventoryManagerContext.TblUsers);
+            
         }
 
         //Select Data grid view, click properties and go to RowHeaderMouseClick 
@@ -101,7 +104,7 @@ namespace BillingApp.UI
             txt_FirstName.Text = dgvUsers.Rows[rowIndex].Cells[1].Value.ToString();
             txt_LastName.Text = dgvUsers.Rows[rowIndex].Cells[2].Value.ToString();
             txt_Email.Text = dgvUsers.Rows[rowIndex].Cells[3].Value.ToString();
-            txt_Username.Text = dgvUsers.Rows[rowIndex].Cells[4].Value.ToString();  
+            txt_Username.Text = dgvUsers.Rows[rowIndex].Cells[4].Value.ToString();
             txt_Password.Text = dgvUsers.Rows[rowIndex].Cells[5].Value.ToString();
             txt_Contact.Text = dgvUsers.Rows[rowIndex].Cells[6].Value.ToString();
             txt_Address.Text = dgvUsers.Rows[rowIndex].Cells[7].Value.ToString();
@@ -112,24 +115,24 @@ namespace BillingApp.UI
         private void btn_Update_Click(object sender, EventArgs e)
         {
             //Get the values from UI
-            u.id = Convert.ToInt32(txt_UserId.Text);
-            u.first_name = txt_FirstName.Text;
-            u.last_name = txt_LastName.Text;
-            u.email = txt_Email.Text;
-            u.username = txt_Username.Text;
-            u.password = txt_Password.Text;
-            u.contact = txt_Contact.Text;
-            u.address = txt_Address.Text;
-            u.gender = cmb_Gender.Text;
-            u.user_type = cmb_UserType.Text;
-            u.added_date = DateTime.Now;
-            u.added_by = 1;
+            user.Id = Convert.ToInt32(txt_UserId.Text);
+            user.FirstName = txt_FirstName.Text;
+            user.LastName = txt_LastName.Text;
+            user.Email = txt_Email.Text;
+            user.Username = txt_Username.Text;
+            user.Password = txt_Password.Text;
+            user.Contact = txt_Contact.Text;
+            user.Address = txt_Address.Text;
+            user.Gender = cmb_Gender.Text;
+            user.UserType = cmb_UserType.Text;
+            user.AddedDate = DateTime.Now;
+            user.AddedBy = 1;
 
             //Updating Data in the Database
-            bool succes = dal.Update(u);
+            bool succes = businessLogicLayer.Update<TblUser>(user);
 
             //if data is updated successfully then the value of success will be true else it will be false
-            if(succes == true)
+            if (succes == true)
             {
                 MessageBox.Show("User details updated successfully");
                 clear();
@@ -139,16 +142,15 @@ namespace BillingApp.UI
                 MessageBox.Show("User details not updated");
             }
             //Create load event for page so data loads up 
-            DataTable dt = dal.Select();
-            dgvUsers.DataSource = dt;
+            updateUserTable();
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-            u.id = Convert.ToInt32(txt_UserId.Text);
+            user.Id = Convert.ToInt32(txt_UserId.Text);
 
-            bool succes = dal.Delete(u);
-            if(succes == true)
+            bool succes = businessLogicLayer.Delete<TblUser>(user);
+            if (succes == true)
             {
                 MessageBox.Show("User Deleted");
                 clear();
@@ -158,8 +160,7 @@ namespace BillingApp.UI
             {
                 MessageBox.Show("User not Deleted");
             }
-            DataTable dt = dal.Select();
-            dgvUsers.DataSource = dt;
+            updateUserTable();
 
         }
 
@@ -169,18 +170,16 @@ namespace BillingApp.UI
             string keywords = txt_Search.Text;
 
             //Check if keyword has value
-            if(keywords != null)
+
+            if (keywords != null)
             {
-                DataTable dt = dal.Search(keywords);
-                dgvUsers.DataSource = dt;   
+                this.tblUserBindingSource1.DataSource = businessLogicLayer.Search<TblUser>(inventoryManagerContext.TblUsers, u => u.FirstName == keywords.ToString());
+
             }
             else
             {
-                DataTable dt = dal.Select();
-                dgvUsers.DataSource = dt;   
+                updateUserTable();
             }
         }
-
-       
     }
 }

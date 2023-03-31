@@ -12,3 +12,13 @@ C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\bin\Debug\Renci.
 C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.CopyComplete
 C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.dll
 C:\CODE\experiments\BillingApp-in-C-Sharp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.pdb
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\bin\Debug\BillingApp.DataAccess.dll
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\bin\Debug\BillingApp.DataAccess.pdb
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\bin\Debug\BillingApp.DataModel.dll
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\bin\Debug\MySql.Data.dll
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\bin\Debug\Renci.SshNet.dll
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\bin\Debug\BillingApp.DataModel.pdb
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\bin\Debug\Renci.SshNet.xml
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.csproj.CopyComplete
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.dll
+C:\projects\C# projects\BillingApp\BillingApp.DataAccess\obj\Debug\BillingApp.DataAccess.pdb

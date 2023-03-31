@@ -1,0 +1,13 @@
+C:\projects\C# projects\BillingApp\DataAccessLayer\bin\Debug\net70\DataAccessLayer.dll.config
+C:\projects\C# projects\BillingApp\DataAccessLayer\bin\Debug\net70\DataAccessLayer.deps.json
+C:\projects\C# projects\BillingApp\DataAccessLayer\bin\Debug\net70\DataAccessLayer.runtimeconfig.json
+C:\projects\C# projects\BillingApp\DataAccessLayer\bin\Debug\net70\DataAccessLayer.dll
+C:\projects\C# projects\BillingApp\DataAccessLayer\bin\Debug\net70\DataAccessLayer.pdb
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\net70\DataAccessLayer.csproj.AssemblyReference.cache
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\net70\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\net70\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\net70\DataAccessLayer.dll
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\net70\refint\DataAccessLayer.dll
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\net70\DataAccessLayer.pdb
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\net70\DataAccessLayer.genruntimeconfig.cache
+C:\projects\C# projects\BillingApp\DataAccessLayer\obj\Debug\net70\ref\DataAccessLayer.dll
