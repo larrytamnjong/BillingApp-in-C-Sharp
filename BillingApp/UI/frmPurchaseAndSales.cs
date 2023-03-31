@@ -179,7 +179,7 @@ namespace BillingApp.UI
             transaction.Type = lbl_top.Text;
 
             //Get the ID of the Dealer or Customer
-            //Let's get name of the dealer or customer first
+           
             string deaCustName = txt_Name.Text;
             //deaCustBLL dc = dcDAL.GetDeaCustIDFromName(deaCustName);
             transaction.DeaCustId = 1;
